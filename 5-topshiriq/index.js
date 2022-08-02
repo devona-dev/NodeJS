@@ -1,11 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
+
 const categoriesRoute = require('./routes/categories');
 const customersRoute = require('./routes/customers');
 const app = express();
-app.use(express.json());
-app.use('/api/categories', categoriesRoute);
-app.use('/api/customers', customersRoute)
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/virtualDars')
     .then(()=>{
@@ -14,6 +12,13 @@ mongoose.connect('mongodb://localhost/virtualDars')
     .catch((err)=>{
         console.error('ulanishda xatolik', err);
     })
+
+// mongoose.set('useFindAndModify', false);
+app.use(express.json());
+app.use('/api/categories', categoriesRoute);
+app.use('/api/customers', customersRoute)
+
+
 
 const port = process.env.PORT || 5000;
 

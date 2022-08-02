@@ -1,7 +1,7 @@
 const express = require('express');
 const Joi = require('joi');
 const router = express.Router();
-const Customer = require('../models/customer')
+const { Customer }  = require('../models/customer')
 
 
 
