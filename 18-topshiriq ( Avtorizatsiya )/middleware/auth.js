@@ -13,7 +13,7 @@ module.exports = function auth(req, res, next) {
         next();
     }
     catch(ex){
-        return res.status(400).send('Yaroqsiz token', ex);
+        return res.status(400).send('Yaroqsiz token');
     }
 
 }

@@ -2,7 +2,9 @@ const express = require('express');
 const Joi = require('joi');
 const router = express.Router();
 const { Category } = require('../models/category')
+const admin = require('../middleware/admin');
 const auth = require('../middleware/auth');
+
 
 
 router.get('/', async (req, res) => {
@@ -59,7 +61,7 @@ router.put('/:id', auth , async (req, res) => {
     res.send(category);
 });
 
-router.delete('/:id', auth , async (req, res) => {
+router.delete('/:id', [auth, admin] , async (req, res) => {
     const category = await Category.findByIdAndRemove(req.params.id);
     if (!category)
         return res.status(404).send('Berilgan IDga teng bo\'lgan toifa topilmadi');
